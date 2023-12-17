@@ -17,11 +17,9 @@ class ArticleEntityListener
     {
     }
 
-    public function prePersist(PrePersistEventArgs $event): void
+    public function prePersist(\App\Entity\Article $entity): void
     {
-        /** @var  Article $entity */
-        $entity = $event ->getObject();
-        $entity ->setCreateAt(new \DateTimeImmutable());
-        $entity ->setAuthor($this->security->getUser());
+        $entity ->setCreateAt(new \DateTimeImmutable())
+            ->setAuthor($this->security->getUser());
     }
 }
