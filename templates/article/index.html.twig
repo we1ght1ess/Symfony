@@ -30,10 +30,12 @@
         {{ form_end(form) }}
 
         {% for item in article.comments|filter(v => v.isViewableByUsers) %}
+            <h1></h1>
             <div class="comment">
                 {{ item.comment }}, Автор: {{ item.displayauthor }}, Дата: {{ item.createAt|date('d.m.Y H:i:s') }}
             </div>
         {% else %}
+            <h1></h1>
             <div>Комментариев пока нет</div>
         {% endfor %}
     </div>
