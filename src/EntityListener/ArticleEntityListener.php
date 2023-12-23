@@ -15,6 +15,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsEntityListener(event: Events::prePersist, method: 'prePersist', entity: Article::class)]
 #[AsEntityListener(event: Events::preUpdate, method: 'preUpdate', entity: Article::class)]
+#[AsEntityListener(event: Events::postPersist, method: 'postPersist', entity: Article::class)]
 class ArticleEntityListener
 {
     public function __construct(
@@ -28,8 +29,11 @@ class ArticleEntityListener
     {
         $entity ->setCreateAt(new \DateTimeImmutable())
             ->setAuthor($this->security->getUser());
+    }
 
-       $this->bus->dispatch(new ArticleNotification(
+    public function postPersist(\App\Entity\Article $entity)
+    {
+        $this->bus->dispatch(new ArticleNotification(
             $entity->getId(),
             $entity->getTitle(),
             $entity->getBody(),
