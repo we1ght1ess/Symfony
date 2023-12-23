@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}AdminPanel!{% endblock %}
+{% block title %}Админ панель{% endblock %}
 
 {% block body %}
 <style>
@@ -10,10 +10,10 @@
 
 <div class="example-wrapper">
   <p>
-  <a href ="{{ path('app_article_new') }}" class="btn btn-default">Создать статью</a>
+  <a href ="{{ path('app_article_new') }}"  class="btn btn-primary">Создать статью</a>
   </p>
   <p>
-    <a href ="{{ path('homepage') }}" class="btn btn-default">Домой</a>
+    <a href ="{{ path('homepage') }}"  class="btn btn-primary">Домой</a>
   </p>
 </div>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Редактирование статьи{% endblock %}
+
+{% block body %}
+    <h1>Редактировать статью</h1>
+
+    {{ include('admin/article/_form.html.twig', {'button_label': 'Update' |trans}) }}
+
+    <a class="btn btn-secondary" href="{{ path('app_article_index') }}" >{{ 'back_to_list'|trans }} </a>
+
+    {{ include('admin/article/_delete_form.html.twig') }}
+{% endblock %}
