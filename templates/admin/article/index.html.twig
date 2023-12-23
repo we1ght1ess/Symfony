@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Список статей{% endblock %}
+
+{% block body %}
+    <h1>Список статей</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>CreateAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.body }}</td>
+                <td>{{ article.createAt ? article.createAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_article_show', {'id': article.id}) }}">Открыть</a>
+                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">Редактировать</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_article_new') }}"  class="btn btn-primary">Создать статью</a>
+    <a href ="{{ path('homepage') }}"  class="btn btn-primary">Домой</a>
+{% endblock %}
