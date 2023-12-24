@@ -8,12 +8,24 @@
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
         .article { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
         .article-title { margin-bottom: 10px; }
-        .button-left{ text-align: right}
+        .buttons-container {display: flex;justify-content: space-between;}
+        .left-buttons, .right-buttons {display: flex;}
+        .right-buttons {align-items: center;}
+        .left-buttons a {margin-right: 10px;}
     </style>
 
     <div class="example-wrapper">
-        <a href="{{ path('admin.index') }}" class="btn btn-primary">Администрирование</a>
-        <a href="/login" class="btn btn-primary">Авторизация</a>
+        <div class="buttons-container">
+            <div class="left-buttons">
+                <a href="/login" class="btn btn-outline-secondary">Авторизация</a>
+                <a href="/register" class="btn btn-outline-secondary">Регистрация</a>
+            </div>
+            <div class="right-buttons">
+                {% if app.user %}
+                    {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="btn btn-outline-danger">Выйти из аккаунта</a>
+                {% endif %}
+            </div>
+        </div>
         {{ form_start(form, {attr: {'class': 'form-inline mt-3'}}) }}
         {{ form_widget(form) }}
         <button class="btn btn-primary my-2 my-sm-2">{{ button_label|default('Найти') }}</button>
@@ -23,7 +35,7 @@
         {% for article in articles %}
             <div class="article">
                 <h3 class="article-title"><a href="{{ path('article.show', {'article' : article.id}) }}">{{ article.title }}</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-primary ml-2" >Редактировать</a>
+                    <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-outline-primary ml-2" >Редактировать</a>
                 </h3>
                 <div class="text-muted mt-2">
                     Дата создания: {{ article.createAt|date('d.m.Y H:i:s')}}, Автор: {{ article.author.email }}
@@ -32,7 +44,8 @@
         {% else %}
             <div class="mt-4">Ничего не нашлось</div>
         {% endfor %}
-
+        <a href="{{ path('admin.index') }}" class="btn btn-primary">Администрирование</a>
+        <h1></h1>
         {{ pagerfanta(articles) }}
     </div>
 {% endblock %}

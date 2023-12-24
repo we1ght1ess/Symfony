@@ -6,6 +6,7 @@
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 17px/1.5 sans-serif;}
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .article { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
     </style>
     <div class="example-wrapper">
     <h1>{{ article.title }}</h1>
@@ -31,12 +32,13 @@
 
         {% for item in article.comments|filter(v => v.isViewableByUsers) %}
             <h1></h1>
-            <div class="comment">
+            <div class="article">
                 {{ item.comment }}, Автор: {{ item.displayauthor }}, Дата: {{ item.createAt|date('d.m.Y H:i:s') }}
             </div>
         {% else %}
             <h1></h1>
             <div>Комментариев пока нет</div>
         {% endfor %}
+
     </div>
 {% endblock %}
